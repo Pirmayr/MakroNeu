@@ -1,0 +1,37 @@
+function Primes
+  define parameter N
+  define variable table(1000000)
+  nrOfPrimes = 0
+  i = 5
+  while i <= N do
+    j = 0
+    while j <= 2 do
+      table(i + j) = 0
+      j = j + 2
+    end
+    i = i + 6
+  end
+  i = 5
+  while i <= N do
+    j = 0
+    while j <= 2 do
+      k = i + j
+      if table(k) = 0 then
+        nrOfPrimes = nrOfPrimes + 1
+        l = k + k
+        while l < N do
+          table(l) = 1
+          l = l + k
+        end
+      endif
+      j = j + 2
+    end
+    i = i + 6
+  end
+  return nrOfPrimes
+end
+
+return Primes(1000000)
+
+
+

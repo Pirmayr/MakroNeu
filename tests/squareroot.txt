@@ -1,0 +1,17 @@
+function SquareRoot
+  define parameter n
+  i = 0
+  while i < 100000 do
+    oldX = 0
+    newX = 1
+    epsilon = 1 / 100000
+    while epsilon < abs(oldX - newX) do
+      oldX = newX
+      newX = (newX + n / newX) / 2
+    end
+    i = i + 1
+  end
+  return newX
+end
+
+return SquareRoot(2)

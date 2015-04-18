@@ -1,0 +1,12 @@
+function Fibonacci
+  define parameter n
+  if n = 1 then
+    return 1
+  endif
+  if n = 2 then
+    return 1
+  endif
+  return Fibonacci(n - 2) + Fibonacci(n - 1)
+end
+
+return Fibonacci(25)

@@ -1,0 +1,47 @@
+COMPILER makro
+
+CHARACTERS
+  char = ANY - '"'.  
+  letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz$".
+  digit = "0123456789".
+  cr  = '\r'.
+  lf  = '\n'.
+  tab = '\t'.
+
+TOKENS
+  string = '"' {char} '"'.
+  identifier = letter {letter | digit}.
+  number = digit {digit}.
+
+COMMENTS FROM "/*" TO "*/" NESTED
+COMMENTS FROM "//" TO lf
+
+IGNORE cr + lf + tab
+
+PRODUCTIONS
+expressions = expression (.Merge();.) { "," expression (.Merge();.) }.
+invokation = identifier (.DefineIdentifier();.) [ "(" expressions ")"].
+factor = number (.PushNewNumber();.) | string (.PushNewString();.) | invokation | "(" expression ")".
+term = factor {"*" factor (.PushNewBinary(tagMultiply);.) | "/" factor (.PushNewBinary(tagDivide);.)}.
+value = term {"+" term (.PushNewBinary(tagAdd);.) | "-" term (.PushNewBinary(tagSubtract);.) }.
+equal = "=" value (.PushNewBinary(tagEqual);.).
+unequal = "<>" value (.PushNewBinary(tagNotEqual);.).
+smaller = "<" value (.PushNewBinary(tagLess);.).
+greater = ">" value (.PushNewBinary(tagGreater);.).
+smallerEqual = "<=" value (.PushNewBinary(tagLessOrEqual);.).
+greaterEqual = ">=" value (.PushNewBinary(tagGreaterOrEqual);.).
+expression = value {equal | unequal | smaller | greater | smallerEqual | greaterEqual}.
+run = "run" (.PushNew(tagRun);.) expression (.Merge();.).
+assignement = invokation "=" expression (.PushNewBinary(tagAssign);.).
+print = "print" (.PushNew(tagPrint);.) expression (.Merge();.).
+returnment = "return" (.PushNew(tagReturn);.) expression (.Merge();.).
+selection = "if" (.PushNew(tagSelection);.) expression (.Merge();.) "then" statements (.Merge();.) "endif".
+iteration = "while" (.PushNew(tagIteration);.) expression (.Merge();.) "do" statements (.Merge();.) "end".
+routine = ("function" (.DefineFunction();.) | "procedure" (.DefineProcedure();.) ) invokation (.Merge();EnterLocalScope();.) statements (.Merge();.) "end" (.LeaveLocalScope();.).
+definitions = "define" ("variable" (.PushNew(tagDefine);.) | "parameter" (.PushNew(tagParameters);.))  expressions.
+statement = run | assignement | print | returnment | selection | iteration | routine | definitions.
+statements = (.PushNew(tagSequence);.) statement (.Merge();.) { statement (.Merge();.) }.
+makro = statements.
+
+
+END makro.
