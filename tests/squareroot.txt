@@ -14,4 +14,4 @@ function SquareRoot
   return newX
 end
 
-return SquareRoot(2)
+return SquareRoot(9)

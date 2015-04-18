@@ -93,9 +93,4 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Makro.ATG" />
-    <None Include="Parser.frame" />
-    <None Include="Scanner.frame" />
-  </ItemGroup>
 </Project>
