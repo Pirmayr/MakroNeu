@@ -10,7 +10,7 @@
 #include "node.h"
 #include "stack.h"
 
-const std::string RESULT_FAILURE = "failure(s)"; // 1
+const std::string RESULT_FAILURE = "failure(s)";
 const bool VERBOSE = true;
 
 using namespace Helpers;
