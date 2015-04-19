@@ -99,7 +99,7 @@ int _tmain(int argc, TCHAR* argv[])
   if (argc == 2)
   {
     parse(argv[1]);
-    getchar();
+    // getchar();
   }
 
   return 0;

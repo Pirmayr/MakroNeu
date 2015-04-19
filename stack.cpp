@@ -1,4 +1,5 @@
 #include "stdafx.h" 
+#include <array>
 #include <vector>
 #include "stack.h"
 #include "node.h"

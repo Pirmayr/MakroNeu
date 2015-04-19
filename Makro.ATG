@@ -11,7 +11,7 @@ CHARACTERS
 TOKENS
   string = '"' {char} '"'.
   identifier = letter {letter | digit}.
-  number = digit {digit}.
+  number = digit {digit} ["." digit { digit }].
 
 COMMENTS FROM "/*" TO "*/" NESTED
 COMMENTS FROM "//" TO lf

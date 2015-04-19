@@ -1,6 +1,6 @@
 function Test
   i = 0
-  while i < 10000 do
+  while i < 100000 do
     i = i + 1
   end
   return 0
@@ -8,7 +8,7 @@ end
 
 function TestSetPixel
   y = 0
-  while y < 1000 do
+  while y < 5000 do
     x = 0
     while x < 1000 do
       x = x + 1
@@ -18,7 +18,7 @@ function TestSetPixel
   return 0
 end
 
-return TestSetPixel
+return Test
 
 
 

@@ -1,7 +1,7 @@
 function SquareRoot
   define parameter n
   i = 0
-  while i < 100000 do
+  while i < 10000 do
     oldX = 0
     newX = 1
     epsilon = 1 / 100000
@@ -14,4 +14,4 @@ function SquareRoot
   return newX
 end
 
-return SquareRoot(9)
+return int(SquareRoot(6))

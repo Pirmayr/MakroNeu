@@ -9,25 +9,35 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Ressourcendateien">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Tests">
+      <UniqueIdentifier>{7d2534d2-c524-4bd3-bd9f-4d4f0d557fb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Documents">
+      <UniqueIdentifier>{6cb6b117-553b-445e-91d3-51b974cf28c9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-    <Text Include="tests\factorial5.txt" />
-    <Text Include="tests\factorial10.txt" />
-    <Text Include="tests\fibonacci.txt" />
-    <Text Include="tests\primes.txt" />
-    <Text Include="tests\say.txt" />
-    <Text Include="tests\squareroot.txt" />
+    <Text Include="tests\factorial10.txt">
+      <Filter>Tests</Filter>
+    </Text>
+    <Text Include="tests\factorial5.txt">
+      <Filter>Tests</Filter>
+    </Text>
+    <Text Include="tests\fibonacci.txt">
+      <Filter>Tests</Filter>
+    </Text>
+    <Text Include="tests\primes.txt">
+      <Filter>Tests</Filter>
+    </Text>
+    <Text Include="tests\say.txt">
+      <Filter>Tests</Filter>
+    </Text>
+    <Text Include="tests\squareroot.txt">
+      <Filter>Tests</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="any.h">
@@ -92,5 +102,13 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Makro.ATG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Documents\Makro.oxps">
+      <Filter>Documents</Filter>
+    </None>
   </ItemGroup>
 </Project>

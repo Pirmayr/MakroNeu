@@ -14,6 +14,8 @@ namespace Interpreter { // 4
   using namespace Stack;
   using namespace std;
 
+  static unordered_map<string, size_t> times;
+
   struct CInterpreter : IInterpreter {
     typedef void (CInterpreter::*Action)(const PNode&);
     typedef unordered_map<string, Action> Actions;
@@ -120,6 +122,12 @@ namespace Interpreter { // 4
         if (!Evaluate(tree)) {
           return false;
         }
+        /*
+        for (const auto& currentEntry: times)
+        {
+          cout << currentEntry.first << ": " << currentEntry.second << endl;
+        }
+        */
         return PopValue();
       } catch (const string& message) {
         WriteError(message);
@@ -222,6 +230,7 @@ namespace Interpreter { // 4
     }
 
     bool Evaluate(const PNode& tree) {
+      DWORD startTickCount = GetTickCount();
       if (!PerformPreAction(tree)) {
         const auto& node = *tree;
         auto childCount = node.ChildCount();
@@ -238,6 +247,16 @@ namespace Interpreter { // 4
         }
         PerformPostAction(tree);
       }
+      /*
+      DWORD tickCountDifference = GetTickCount() - startTickCount;
+      const string& tag = tree->GetTag();
+      const auto& iterator = times.find(tag);
+      if (iterator == times.end()) {
+        times[tag] = tickCountDifference;
+      } else {
+        times[tag] = times[tag] + tickCountDifference;
+      }
+      */
       return true;
     }
 

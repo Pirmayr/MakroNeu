@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "system.h"
+#include <cmath>
 #include <iostream> 
 #include "any.h"
 #include "helpers.h"
@@ -88,6 +89,20 @@ void DoChr(IInterpreter& interpreter, const INode& /*node*/)
   }
 }
 
+void DoInt(IInterpreter& interpreter, const INode& /*node*/)
+{
+  double value(interpreter.PopValue());
+  double result = floor(value);
+  interpreter.GetValues()->PushNew(tagValue, result);
+}
+
+void DoLCase(IInterpreter& interpreter, const INode& /*node*/)
+{
+  string value(interpreter.PopValue());
+  for (auto & currentCharacter: value) currentCharacter = tolower(currentCharacter);
+  interpreter.GetValues()->PushNew(tagValue, value);
+}
+
 void DoLen(IInterpreter& interpreter, const INode& /*node*/)
 {
   string value(interpreter.PopValue());
@@ -157,8 +172,15 @@ void DoString(IInterpreter& interpreter, const INode& /*node*/)
 
 void DoVal(IInterpreter& interpreter, const INode& /*node*/)
 {
-  string value = interpreter.PopValue();
+  string value(interpreter.PopValue());
   interpreter.GetValues()->PushNew(tagValue, stod(value));
+}
+
+void DoUCase(IInterpreter& interpreter, const INode& /*node*/)
+{
+  string value(interpreter.PopValue());
+  for (auto & currentCharacter: value) currentCharacter = toupper(currentCharacter);
+  interpreter.GetValues()->PushNew(tagValue, value);
 }
 
 void InitializeSystem(IInterpreter& interpreter)
@@ -167,11 +189,14 @@ void InitializeSystem(IInterpreter& interpreter)
   predefinedFunctions["abs"] = DoAbs;
   predefinedFunctions["asc"] = DoAsc;
   predefinedFunctions["chr$"] = DoChr;
+  predefinedFunctions["int"] = DoInt;
+  predefinedFunctions["lcase$"] = DoLCase;
   predefinedFunctions["len"] = DoLen;
   predefinedFunctions["max"] = DoMax;
   predefinedFunctions["message"] = DoMessage;
   predefinedFunctions["pi"] = DoPi;
   predefinedFunctions["setpixel"] = DoSetPixel;
+  predefinedFunctions["ucase$"] = DoUCase;
 }
 
 #endif

@@ -1,9 +1,10 @@
 #ifndef helpers_h
 #define helpers_h
 
+#include <string>
 #include "any.h"
 
-#define DECLARE_ENUMERATION(name) static const char* name = #name
+#define DECLARE_ENUMERATION(name) static std::string name(#name)
 
 DECLARE_ENUMERATION(tagAdd);
 DECLARE_ENUMERATION(tagAssign);

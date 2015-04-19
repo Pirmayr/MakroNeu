@@ -7,13 +7,13 @@
 
 namespace Node {
   using namespace Stack;
-  // using namespace boost;
   using namespace std;
 
+  static const string none;
   static any defaultValue = 0.0;
 
   struct CNode : INode {
-    string tag;
+    const string* pTag;
     any value;
     vector<any> values;
     any valueSelector;
@@ -29,7 +29,7 @@ namespace Node {
     bool breakFlow;
 
     CNode() {
-      // Initialize();
+      Initialize();
     }
 
     CNode(const string& tag, const any& value, int itemOffset) {
@@ -37,7 +37,7 @@ namespace Node {
     }
 
     void Initialize() {
-      this->tag = "";
+      pTag = &none;
       this->localNameOffset = 0;
       valueSelector = 0;
       hasPreAction = hasActionNotSet;
@@ -48,7 +48,7 @@ namespace Node {
     }
 
     void Initialize(const string& tag, const any& value, int itemOffset) {
-      this->tag = tag;
+      pTag = &tag;
       this->value = value;
       this->localNameOffset = itemOffset;
       valueSelector = 0;
@@ -92,7 +92,7 @@ namespace Node {
     }
 
     const string& GetTag() const {
-      return tag;
+      return *pTag;
     }
 
     void SetValue(const any& newValue) {
@@ -235,9 +235,6 @@ namespace Node {
     objectPool.push_front(object);
   }
 
-  PNode::PNode(): shared_ptr<INode>(NewObject(), DeleteObject) 
-  {
-    int a = 0;
-  }
+  PNode::PNode(): shared_ptr<INode>(NewObject(), DeleteObject) {}
   PNode::PNode(const string& tag, const any& value, int itemOffset): shared_ptr<INode>(NewObject(tag, value, itemOffset), DeleteObject) {}
 }
